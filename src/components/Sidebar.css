@@ -1,0 +1,61 @@
+.sidebar {
+  width: 230px;
+  background: linear-gradient(
+    to right,
+    rgba(160, 151, 163, 0.9),
+    rgba(120, 30, 80, 0.8)
+  );/* clean dark */
+  padding: 100px 20px 20px;
+  color: white;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar h4 {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.sidebar li:hover {
+  color: #FF0067;
+}
+
+.playlist-btn {
+  margin-top: 20px;
+  background: #FF0067;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  color: white;
+  width: 100%;
+  cursor: pointer;
+}
+.sidebar {
+  width: 230px;
+  background: linear-gradient(
+    to right,
+    rgba(160, 151, 163, 0.9),
+    rgba(120, 30, 80, 0.8)
+  );
+  padding: 100px 20px 20px;
+  color: white;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: 0.3s ease;
+}
+
+/* MOBILE DEFAULT HIDDEN */
+@media (max-width: 900px) {
+  .sidebar {
+    display:none}
+  }

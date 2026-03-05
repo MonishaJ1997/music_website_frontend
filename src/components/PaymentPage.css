@@ -1,0 +1,245 @@
+/* Background */
+.payment-wrapper {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(255, 196, 0, 0.45),
+      rgba(255, 140, 0, 0.25),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 10% 80%,
+      rgba(120, 0, 255, 0.35),
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #0a0a12,
+      #140021,
+      #1b0033
+    ) !important;
+  background-attachment: fixed;
+  color: white;
+  margin-top: 50px;
+}
+
+/* Layout */
+.payment-body {
+  display: flex;
+}
+
+.payment-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+/* Glass Card */
+.payment-card {
+  width: 450px;
+  padding: 35px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Heading */
+.payment-heading {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.price-display {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #ff9bd2;
+}
+
+/* UPI Button */
+.upi-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(90deg, #ff3d81, #ff1744);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.upi-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 25px rgba(255, 23, 68, 0.4);
+}
+
+/* Divider */
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider span {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* Form Styling */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 13px;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.form-group input {
+  padding: 11px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: #f2f2f2;
+  color: #333;
+  transition: 0.2s;
+}
+
+.form-group input:focus {
+  box-shadow: 0 0 0 2px #ff3d81;
+}
+
+/* Row Inputs */
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.half {
+  flex: 1;
+}
+
+/* Section Title */
+.section-title {
+  margin: 20px 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Pay Button */
+.pay-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #ff3d81, #ff1744);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 23, 68, 0.5);
+}
+
+/* Smooth Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Right panel layout */
+.payment-right {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  min-height: calc(100vh - 50px); /* adjust for navbar */
+  padding: 20px;
+}
+
+/* Wrap form + footer together */
+.payment-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Footer below form */
+.payment-footer {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 850px; /* match form width */
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive: mobile/tablet */
+@media (max-width: 768px) {
+  .payment-body {
+    flex-direction: column;
+   
+  }
+
+  .payment-right {
+    min-height: auto;
+    padding: 20px;
+    
+  }
+.payment-card{
+    width: 300px;
+}
+.form-group .half{
+flex: 0.5;
+}
+  .payment-footer {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+@media (max-width: 768px) {
+  .payment-card {
+    width: 100%;
+    max-width: 350px; /* card smaller for mobile */
+  }
+
+  .row {
+    flex-direction: column; /* stack half inputs vertically */
+  }
+
+  .half {
+    flex: 1;
+    width: 100%; /* full width inside card */
+  }
+
+  .form-group input {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
