@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 function LandingPage({ likedSongs, setLikedSongs }) {
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://music-website-backend-ep97.onrender.com";
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [songs, setSongs] = useState([]);
   const navigate = useNavigate();
