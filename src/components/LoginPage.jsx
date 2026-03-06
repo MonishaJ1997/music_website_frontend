@@ -4,7 +4,7 @@ import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-   const BASE_URL = "http://127.0.0.1:8000";
+   const BASE_URL = "https://music-website-backend-ep97.onrender.com";
   const [banner, setBanner] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
