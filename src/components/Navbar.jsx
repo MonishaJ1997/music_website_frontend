@@ -72,7 +72,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
           onMouseEnter={() => setShowPodcast(true)}
           onMouseLeave={() => setShowPodcast(false)}
         >
-          <span>Podcasts ▾</span>
+         
           {showPodcast && (
             <div className="dropdown-menu">
               <p>Trending Podcasts</p>
@@ -162,7 +162,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
 
           <div className="nav-links-mobile">
             <p>Music</p>
-            <p>Podcasts</p>
+            
             <p onClick={() => navigate("/pro")}>Pro</p>
           </div>
 

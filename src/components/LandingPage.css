@@ -214,3 +214,17 @@ body {
     font-size: 18px;
   }
 }
+
+.heart-btn{
+position:absolute;
+top:8px;
+right:8px;
+font-size:20px;
+cursor:pointer;
+z-index:5;
+transition:0.2s;
+}
+
+.heart-btn:hover{
+transform:scale(1.2);
+}

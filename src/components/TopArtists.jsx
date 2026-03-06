@@ -1,30 +1,31 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import "./LandingPage.css";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+ // you can reuse LandingPage.css
 
-function LandingPage({ likedSongs, setLikedSongs }) {
+function TopArtists() {
   const BASE_URL = "http://127.0.0.1:8000";
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [songs, setSongs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+  // Navigate to album/song page
   const goToAlbum = (e, song) => {
     e.stopPropagation();
-    console.log("Section:", song.section);
-    console.log("Song ID:", song.id);
     navigate(`/album/${song.film}`, { state: song });
   };
 
-  const [searchTerm, setSearchTerm] = useState("");
-
+  // Filtered search results
   const filteredSongs = songs.filter((song) =>
     song.title?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Fetch songs from backend
   useEffect(() => {
     axios
       .get(`${BASE_URL}/api/songs/`)
@@ -32,37 +33,19 @@ function LandingPage({ likedSongs, setLikedSongs }) {
       .catch((err) => console.log(err));
   }, []);
 
-  const uniqueFilms = Array.from(
-    new Map(songs.map((song) => [song.film, song])).values()
-  );
+  // Only Top Artists songs (section_id = 5)
+  const topArtistsSongs = songs.filter((song) => song.film_section === 6);
 
-  const filterSection = (id) =>
-    uniqueFilms.filter((film) => film.film_section == id);
-
-  // ❤️ Toggle Like
-  const toggleLike = (song) => {
-    const exists = likedSongs.find((s) => s.id === song.id);
-
-    if (exists) {
-      setLikedSongs(likedSongs.filter((s) => s.id !== song.id));
-    } else {
-      setLikedSongs([...likedSongs, song]);
-    }
-  };
-
-  const isLiked = (id) => likedSongs.some((s) => s.id === id);
-
-  // ✅ Format Fans
+  // Format fans count
   const formatFans = (num) => {
     if (!num) return "0 Fans";
     if (num >= 1000000)
       return (num / 1000000).toFixed(1).replace(".0", "") + "M Fans";
-    if (num >= 1000)
-      return (num / 1000).toFixed(1).replace(".0", "") + "K Fans";
+    if (num >= 1000) return (num / 1000).toFixed(1).replace(".0", "") + "K Fans";
     return num + " Fans";
   };
 
-  // ✅ Carousel
+  // Carousel component
   const CarouselSection = ({ title, data, limit, showDetails }) => {
     const [items, setItems] = useState([]);
 
@@ -83,7 +66,6 @@ function LandingPage({ likedSongs, setLikedSongs }) {
     return (
       <div className="section-wrapper">
         <h2>{title}</h2>
-
         <div className="carousel-container">
           <button className="carousel-btn left" onClick={moveLeft}>
             ◀
@@ -96,32 +78,12 @@ function LandingPage({ likedSongs, setLikedSongs }) {
                 key={song.id}
                 onClick={() => console.log("Play:", song.title)}
               >
-                <img
-                  src={`${BASE_URL}${song.film_image}`}
-                  alt={song.title || "Music"}
-                />
-
-                {/* ❤️ Heart Button */}
-                <div
-                  className="heart-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleLike(song);
-                  }}
-                >
-                  {isLiked(song.id) ? "❤️" : "🤍"}
-                </div>
-
-                {/* Hover Play Button */}
+                <img src={`${BASE_URL}${song.film_image}`} alt={song.title} />
                 <div className="play-overlay">
-                  <div
-                    className="play-btn"
-                    onClick={(e) => goToAlbum(e, song)}
-                  >
+                  <div className="play-btn" onClick={(e) => goToAlbum(e, song)}>
                     ▶
                   </div>
                 </div>
-
                 {showDetails && (
                   <div className="song-card-content">
                     <h4>{song.title || "Untitled Song"}</h4>
@@ -142,15 +104,16 @@ function LandingPage({ likedSongs, setLikedSongs }) {
 
   return (
     <div className="layout">
+      {/* Navbar */}
       <Navbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
       />
 
+      {/* Sidebar */}
       <>
-        <Sidebar isOpen={sidebarOpen} />
-
+        <Sidebar isOpen={sidebarOpen} closeSidebar={() => setSidebarOpen(false)} />
         {sidebarOpen && (
           <div
             className="sidebar-overlay"
@@ -159,6 +122,7 @@ function LandingPage({ likedSongs, setLikedSongs }) {
         )}
       </>
 
+      {/* Main content */}
       <div className="main-content">
         {searchTerm ? (
           <div className="section-wrapper">
@@ -171,22 +135,7 @@ function LandingPage({ likedSongs, setLikedSongs }) {
                     key={song.id}
                     onClick={(e) => goToAlbum(e, song)}
                   >
-                    <img
-                      src={`${BASE_URL}${song.film_image}`}
-                      alt={song.title}
-                    />
-
-                    {/* ❤️ Heart */}
-                    <div
-                      className="heart-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleLike(song);
-                      }}
-                    >
-                      {isLiked(song.id) ? "❤️" : "🤍"}
-                    </div>
-
+                    <img src={`${BASE_URL}${song.film_image}`} alt={song.title} />
                     <div className="song-card-content">
                       <h4>{song.title}</h4>
                       <p>{formatFans(song.fans)}</p>
@@ -199,48 +148,19 @@ function LandingPage({ likedSongs, setLikedSongs }) {
             </div>
           </div>
         ) : (
-          <>
-            <CarouselSection
-              title="LATEST SONGS"
-              data={filterSection(1)}
-              limit={5}
-              showDetails={false}
-            />
-
-            <CarouselSection
-              title="TRENDING NOW"
-              data={filterSection(2)}
-              limit={7}
-              showDetails={true}
-            />
-
-            <CarouselSection
-              title="TOP CHARTS"
-              data={filterSection(3)}
-              limit={7}
-              showDetails={true}
-            />
-
-            <CarouselSection
-              title="TOP PLAYLISTS"
-              data={filterSection(4)}
-              limit={7}
-              showDetails={true}
-            />
-
-            <CarouselSection
-              title="TOP ARTISTS"
-              data={filterSection(6)}
-              limit={7}
-              showDetails={true}
-            />
-          </>
+          <CarouselSection
+            title="TOP ARTISTS"
+            data={topArtistsSongs}
+            limit={6}
+            showDetails={true}
+          />
         )}
 
+        {/* Footer */}
         <Footer />
       </div>
     </div>
   );
 }
 
-export default LandingPage;
+export default TopArtists;
