@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Navbar({ searchTerm, setSearchTerm }) {
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://music-website-backend-ep97.onrender.com";
   const [showMusic, setShowMusic] = useState(false);
   const [showPodcast, setShowPodcast] = useState(false);
   const [showPro, setShowPro] = useState(false);
