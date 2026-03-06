@@ -20,6 +20,7 @@ const handleNavigate = (path) => {
     <div className={`sidebar ${isOpen ? "active" : ""}`}>
       <h4>Browse</h4>
       <ul>
+         <li onClick={() => handleNavigate("/")}>Home</li>
         <li onClick={() => handleNavigate("/new-release")}>New release</li>
         <li onClick={() => handleNavigate("/top-charts")}>Top Charts</li>
         <li onClick={() => handleNavigate("/top-playlists")}>Top Playlists</li>
