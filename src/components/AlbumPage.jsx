@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 function AlbumPage() {
 
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://music-website-backend-ep97.onrender.com";
   const { id } = useParams();
   const navigate = useNavigate();
 
