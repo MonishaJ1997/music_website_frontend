@@ -131,7 +131,7 @@ function Navbar({ searchTerm, setSearchTerm }) {
               onClick={async () => {
                 await fetch(`${BASE_URL}/api/logout/`, {
                   method: "POST",
-                  credentials: "include"
+                  
                 });
 
                 localStorage.removeItem("userName");

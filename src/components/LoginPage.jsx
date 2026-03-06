@@ -36,7 +36,7 @@ const LoginPage = () => {
       const res = await axios.post(
         `${BASE_URL}/api/login/`,
         { email, password },
-        { withCredentials: true }
+        
       );
 
       // ✅ Store login data properly
