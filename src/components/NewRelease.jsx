@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
  // you can copy LandingPage.css or make a new one
 
 function NewRelease() {
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = "https://music-website-backend-ep97.onrender.com";
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [songs, setSongs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
